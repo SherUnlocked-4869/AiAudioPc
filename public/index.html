@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claudio · 个人 AI 电台</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css?v=7">
+  <meta name="theme-color" content="#0a0a0f">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <h1>Claudio</h1>
+      <span class="subtitle">个人 AI 电台 · 读懂听歌习惯 → 规划声音 → 像 DJ 那样播报</span>
+      <div class="connection" id="connection">● 离线</div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-view="player">Player</button>
+      <button class="tab" data-view="history">History</button>
+      <button class="tab" data-view="profile">Profile</button>
+      <button class="tab" data-view="settings">Settings</button>
+    </nav>
+
+    <!-- Player View -->
+    <section id="player" class="view active">
+      <div class="player-header">
+        <span class="player-title">正在播放</span>
+        <button class="icon-btn" id="player-menu">☰</button>
+      </div>
+
+      <div class="player-card">
+        <div class="track-header">
+          <div class="cover" id="cover">
+            <div class="placeholder">♪</div>
+          </div>
+          <div class="track-meta">
+            <h2 id="track-name">等待播放…</h2>
+            <p id="track-artist">Claudio</p>
+          </div>
+        </div>
+
+        <div class="feedback-bar" id="feedback-bar" style="display:none;">
+          <span>这首感觉：</span>
+          <button data-fb="like">喜欢</button>
+          <button data-fb="neutral">还行</button>
+          <button data-fb="dislike">讨厌</button>
+        </div>
+
+        <div class="visualizer-section">
+          <div class="section-label">VISUALIZER</div>
+          <div class="visualizer" id="visualizer"></div>
+        </div>
+
+        <div class="progress-section">
+          <input type="range" id="progress" value="0" min="0" max="100" step="0.1">
+          <div class="time">
+            <span id="current-time">0:00</span>
+            <span id="duration">0:00</span>
+          </div>
+        </div>
+
+        <div class="dj-section">
+          <div class="section-label">AITUNE</div>
+          <div class="status" id="status">等待输入…</div>
+          <p id="dj-text">说出你想听的风格，或者直接点击「下一首」。</p>
+          <button id="play-tts" class="replay-tts">▶ 重播 DJ 语音</button>
+        </div>
+
+        <div class="controls">
+          <button id="play-pause" class="round-btn">▶</button>
+          <button id="next-btn" class="pill-btn">▶▶ 下一首</button>
+        </div>
+
+        <div class="footer-info">
+          <span>[CHENGDU 30.5558°N, 104.0931°E]</span>
+          <span>[CLOUDY 28°C]</span>
+        </div>
+      </div>
+
+      <audio id="audio" crossorigin="anonymous" preload="auto"></audio>
+
+      <div class="card chat">
+        <div class="label">WS 流式聊天</div>
+        <div id="chat-history"></div>
+        <form id="chat-form">
+          <input type="text" id="chat-input" placeholder="跟 Claudio 说点什么…" autocomplete="off">
+          <button type="submit">发送</button>
+        </form>
+        <div class="quick-actions">
+          <button data-msg="早上好">早上好</button>
+          <button data-msg="来点轻松的">来点轻松的</button>
+          <button data-msg="下一首">下一首</button>
+          <button data-msg="晚上好">晚上好</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- History View -->
+    <section id="history" class="view">
+      <div class="card">
+        <div class="label">播放历史</div>
+        <div id="history-list" class="history-list"></div>
+      </div>
+    </section>
+
+    <!-- Profile View -->
+    <section id="profile" class="view">
+      <div class="card">
+        <div class="label">品味语料</div>
+        <pre id="taste-md"></pre>
+      </div>
+      <div class="card">
+        <div class="label">日常节律</div>
+        <pre id="routines-md"></pre>
+      </div>
+      <div class="card">
+        <div class="label">情绪规则</div>
+        <pre id="mood-md"></pre>
+      </div>
+      <div class="card">
+        <div class="label">导入歌单分析品味</div>
+        <p class="hint">把歌单里的歌曲名复制到下方，每行一首，系统会结合历史播放记录生成新的品味语料。</p>
+        <textarea id="playlist-input" rows="8" placeholder="歌曲名 - 艺人名\n歌曲名\n..."></textarea>
+        <button id="analyze-taste">根据歌单+历史生成品味语料</button>
+        <button id="regenerate-taste" class="secondary">仅根据历史记录刷新品味语料</button>
+        <div id="taste-result" class="taste-result"></div>
+      </div>
+      <div class="card">
+        <div class="label">最近播放</div>
+        <ul id="recent-plays"></ul>
+      </div>
+    </section>
+
+    <!-- Settings View -->
+    <section id="settings" class="view">
+      <div class="card">
+        <div class="label">服务状态</div>
+        <p>WebSocket: <span id="ws-status">未连接</span></p>
+        <p>API: <span id="api-status">检测中…</span></p>
+      </div>
+      <div class="card">
+        <div class="label">模型配置</div>
+        <p>AI: deepseek-v4-flash</p>
+        <p>TTS: mimo-v2.5-tts (冰糖)</p>
+        <p>Music: NeteaseCloudMusicApi</p>
+      </div>
+      <div class="card">
+        <div class="label">缓存</div>
+        <p>TTS 缓存位于 /cache/tts</p>
+        <button id="clear-cache">清除 TTS 缓存</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="/app.js?v=7"></script>
+</body>
+</html>

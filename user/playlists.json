@@ -1,0 +1,22 @@
+{
+  "morning": [
+    { "name": "日出", "artist": "梁晓雪" },
+    { "name": "New Boy", "artist": "朴树" },
+    { "name": "Good Morning Heartache", "artist": "Billie Holiday" }
+  ],
+  "focus": [
+    { "name": "Time", "artist": "Hans Zimmer" },
+    { "name": "S.T.A.Y.", "artist": "Hans Zimmer" },
+    { "name": "Cornfield Chase", "artist": "Hans Zimmer" }
+  ],
+  "relax": [
+    { "name": "plastic love", "artist": "竹内まりや" },
+    { "name": "_midnight", "artist": "優河" },
+    { "name": "宝贝", "artist": "张悬" }
+  ],
+  "evening": [
+    { "name": "夜空中最亮的星", "artist": "逃跑计划" },
+    { "name": "水星记", "artist": "郭顶" },
+    { "name": "City of Stars", "artist": "Ryan Gosling" }
+  ]
+}
