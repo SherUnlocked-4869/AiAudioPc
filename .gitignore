@@ -17,6 +17,9 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
+# Reference images (dev only, not part of project)
+前端展示.jpg
+
 # IDE
 .vscode/
 .idea/
