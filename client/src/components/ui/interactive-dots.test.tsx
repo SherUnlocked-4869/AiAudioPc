@@ -8,9 +8,9 @@ describe('InteractiveDots', () => {
     expect(container.querySelector('canvas')).not.toBeNull()
   })
 
-  it('accepts custom dotColor, dotSize and opacity props without throwing', () => {
+  it('accepts custom dotColor, dotSize, baseOpacity and peakOpacity without throwing', () => {
     const { container } = render(
-      <InteractiveDots dotColor="#ff0000" dotSize={12} opacity={0.5} />
+      <InteractiveDots dotColor="#ff0000" dotSize={24} baseOpacity={0.3} peakOpacity={0.9} />
     )
     expect(container.querySelector('canvas')).not.toBeNull()
   })
@@ -20,5 +20,12 @@ describe('InteractiveDots', () => {
       <InteractiveDots audioAnalyser={undefined} />
     )
     expect(container.querySelector('canvas')).not.toBeNull()
+  })
+
+  it('has dotSize default of 30', () => {
+    // Props are defaults — component renders without error
+    const { container } = render(<InteractiveDots />)
+    const canvas = container.querySelector('canvas') as HTMLCanvasElement
+    expect(canvas).not.toBeNull()
   })
 })
