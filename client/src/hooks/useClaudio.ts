@@ -183,6 +183,9 @@ export function useClaudio(): ClaudioState {
             }
             setCurrentTrack(mapped)
             setFeedback(track.feedback || null)
+            // Synchronise refs immediately so playTTSThenSong reads current values
+            currentTrackRef.current = mapped
+            currentTTSRef.current = data.tts || null
             playTTSThenSong()
           }
           const idx = data.play.findIndex((t) => t.url)
@@ -194,6 +197,7 @@ export function useClaudio(): ClaudioState {
             feedback: t.feedback,
           }))
         } else {
+          currentTTSRef.current = data.tts || null
           if (data.tts) playTTSOnly()
         }
 
