@@ -49,6 +49,36 @@ npm start
 └── cache/tts/                # TTS 缓存
 ```
 
+## React 前端（Phase 1）
+
+新的 React + Vite + TypeScript + Tailwind + shadcn 前端位于 `client/`，与现有纯 JS PWA 并存：
+
+- 旧 PWA 仍在根路径 `/`（`public/`），不受影响。
+- React 构建产物挂在子路径 `/react`，dev 与 prod 均如此。
+
+### 开发
+
+```bash
+# 1. 先启动后端（提供 /api 与 /stream）
+npm start
+
+# 2. 另开终端，启动 Vite dev server（:5173，自动代理 /api、/stream 到 :8080）
+cd client
+npm install
+npm run dev
+# 打开 http://localhost:5173/react/
+```
+
+### 生产构建
+
+```bash
+# 在仓库根目录
+npm run build:client     # 等价于 cd client && npm run build → 输出 client/dist
+npm start                # 访问 http://localhost:8080/react/
+```
+
+Phase 1 仅包含应用外壳（TopBar + 4 个占位视图）与全屏 `InteractiveDots` 背景效果；各视图逻辑将在后续阶段迁移。
+
 ## HTTP API
 
 | 方法 | 路径 | 说明 |
