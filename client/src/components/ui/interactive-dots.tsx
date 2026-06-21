@@ -118,11 +118,11 @@ export function InteractiveDots({
             const highAvg = highSum / (bufferLength - midEnd)
 
             const radiusScale = mapRange(bassAvg, 0, 255, 0.8, 1.6)
-            const proximityGain = mapRange(midAvg, 0, 255, 0.3, 1.0)
+            const proximityFactor = mapRange(midAvg, 0, 255, 0.3, 1.0)
+            const audioDecay = this.decay * proximityFactor
 
-            finalRadius = dynamicRadius * radiusScale * breathAmount
+            finalRadius = (MIN_W + (ACTUAL_W - MIN_W) * audioDecay) * radiusScale * breathAmount
             finalOpacity = dynamicOpacity * mapRange(radiusScale, 0.8, 1.6, 0.7, 1.0)
-            // Use proximityGain for noise variation in jitter (applied per-dot below)
             const jitterMultiplier = mapRange(highAvg, 0, 255, 0.5, 2.0)
             finalRadius *= (0.9 + noiseVal * 0.2 * jitterMultiplier)
           } catch {
