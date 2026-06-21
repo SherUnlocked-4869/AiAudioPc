@@ -17,7 +17,7 @@ export default function App() {
   return (
     <div className="relative min-h-screen">
       <div className="fixed inset-0 -z-10">
-        <InteractiveDots dotColor="#d4a853" dotSize={20} opacity={0.45} />
+        <InteractiveDots dotColor="#d4a853" dotSize={30} />
       </div>
       <div className="relative z-0 mx-auto max-w-[900px] p-4">
         <TopBar online={false} />

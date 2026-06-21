@@ -21,7 +21,6 @@ export function InteractiveDots({
   const mousePos = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
   const mouseTarget = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
   const frameCountRef = useRef(0)
-  const dotsRef = useRef<Dot[]>([])
   const animationIdRef = useRef(0)
 
   useEffect(() => {
@@ -70,7 +69,7 @@ export function InteractiveDots({
         const noiseMap = 0.7 + noiseVal * 0.5
         delta *= noiseMap
 
-        const GREATER = Math.max(canvas.width, canvas.height)
+        const GREATER = Math.max(canvas!.width, canvas!.height)
         const halfGreater = GREATER / 2
 
         if (delta > halfGreater) {
@@ -151,8 +150,8 @@ export function InteractiveDots({
     let dots: Dot[] = []
 
     function rebuildDots() {
-      const COLS = Math.ceil(canvas.width / CIRCLE_DIST) + 1
-      const ROWS = Math.ceil(canvas.height / CIRCLE_DIST) + 1
+      const COLS = Math.ceil(canvas!.width / CIRCLE_DIST) + 1
+      const ROWS = Math.ceil(canvas!.height / CIRCLE_DIST) + 1
       dots = []
       for (let ci = 0; ci < COLS; ci++) {
         for (let ri = 0; ri < ROWS; ri++) {
