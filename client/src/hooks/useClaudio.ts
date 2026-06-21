@@ -116,6 +116,9 @@ export function useClaudio(): ClaudioState {
   const currentTrackRef = useRef(currentTrack)
   currentTrackRef.current = currentTrack
 
+  const currentTTSRef = useRef(currentTTS)
+  currentTTSRef.current = currentTTS
+
   // ---- WebSocket ----
   const connectWS = useCallback(() => {
     const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:'
@@ -335,22 +338,24 @@ export function useClaudio(): ClaudioState {
 
   const playTTSOnly = useCallback(() => {
     const tts = ttsAudioRef.current
-    if (!tts || !currentTTS) return
-    tts.src = currentTTS
+    const ttsUrl = currentTTSRef.current
+    if (!tts || !ttsUrl) return
+    tts.src = ttsUrl
     tts.play().catch(console.error)
-  }, [currentTTS])
+  }, [])
 
   const playTTSThenSong = useCallback(() => {
-    if (currentTTS) {
+    const ttsUrl = currentTTSRef.current
+    if (ttsUrl) {
       const tts = ttsAudioRef.current
       if (tts) {
-        tts.src = currentTTS
+        tts.src = ttsUrl
         tts.play().catch(() => playSongOnly())
       }
     } else {
       playSongOnly()
     }
-  }, [currentTTS, playSongOnly])
+  }, [playSongOnly])
 
   const play = useCallback(() => {
     setupAudioContext()
