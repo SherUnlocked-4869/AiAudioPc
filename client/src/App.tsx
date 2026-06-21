@@ -14,19 +14,19 @@ const TABS: Tab[] = [
 
 export default function App() {
   const [active, setActive] = useState('player')
-  const { audioAnalyser } = useClaudioContext()
+  const { audioAnalyser, isOnline } = useClaudioContext()
 
   return (
     <div className="relative min-h-screen">
-      <div className="fixed inset-0 -z-10">
+      <div className="fixed inset-0 z-0">
         <InteractiveDots
           dotColor="#d4a853"
           dotSize={30}
           audioAnalyser={audioAnalyser ?? undefined}
         />
       </div>
-      <div className="relative z-0 mx-auto max-w-[900px] p-4">
-        <TopBar online={false} />
+      <div className="relative z-10 mx-auto max-w-[900px] p-4">
+        <TopBar online={isOnline} />
         <TabNav tabs={TABS} activeId={active} onTabChange={setActive} />
         <ViewContainer active={active} />
       </div>

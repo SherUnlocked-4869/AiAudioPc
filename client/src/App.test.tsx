@@ -19,7 +19,7 @@ describe('App', () => {
   it('switches to the Settings view when the Settings tab is clicked', async () => {
     render(<ClaudioProvider><App /></ClaudioProvider>)
     await userEvent.click(screen.getByRole('button', { name: 'Settings' }))
-    expect(screen.getByRole('heading', { name: 'Settings', level: 2 })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '设置', level: 2 })).toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: '等待播放…', level: 2 })).not.toBeInTheDocument()
   })
 })

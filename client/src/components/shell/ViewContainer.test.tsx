@@ -11,12 +11,12 @@ describe('ViewContainer', () => {
 
   it('renders the History heading when active is "history"', () => {
     render(<ClaudioProvider><ViewContainer active="history" /></ClaudioProvider>)
-    expect(screen.getByRole('heading', { name: 'History', level: 2 })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '播放历史', level: 2 })).toBeInTheDocument()
   })
 
   it('renders the Settings heading when active is "settings"', () => {
     render(<ClaudioProvider><ViewContainer active="settings" /></ClaudioProvider>)
-    expect(screen.getByRole('heading', { name: 'Settings', level: 2 })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '设置', level: 2 })).toBeInTheDocument()
   })
 
   it('falls back to Player when the id is unknown', () => {
