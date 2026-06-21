@@ -3,6 +3,7 @@ import { InteractiveDots } from '@/components/ui/interactive-dots'
 import { TopBar } from '@/components/shell/TopBar'
 import { TabNav, type Tab } from '@/components/shell/TabNav'
 import { ViewContainer } from '@/components/shell/ViewContainer'
+import { useClaudioContext } from '@/hooks/useClaudio'
 
 const TABS: Tab[] = [
   { id: 'player', label: 'Player' },
@@ -13,11 +14,16 @@ const TABS: Tab[] = [
 
 export default function App() {
   const [active, setActive] = useState('player')
+  const { audioAnalyser } = useClaudioContext()
 
   return (
     <div className="relative min-h-screen">
       <div className="fixed inset-0 -z-10">
-        <InteractiveDots dotColor="#d4a853" dotSize={30} />
+        <InteractiveDots
+          dotColor="#d4a853"
+          dotSize={30}
+          audioAnalyser={audioAnalyser ?? undefined}
+        />
       </div>
       <div className="relative z-0 mx-auto max-w-[900px] p-4">
         <TopBar online={false} />
