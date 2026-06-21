@@ -1,1 +1,24 @@
-/* Tailwind directives + theme tokens added in Task 2 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0a0f;
+  --panel: #12121a;
+  --panel-2: #1a1a24;
+  --border: #2a2a3a;
+  --accent: #d4a853;
+  --accent-2: #7d9e7e;
+  --text: #e8e6e1;
+  --muted: #8a8791;
+  --danger: #c65d57;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", sans-serif;
+}
