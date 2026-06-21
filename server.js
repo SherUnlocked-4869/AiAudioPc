@@ -32,6 +32,12 @@ app.use('/prompts', express.static(path.join(__dirname, 'prompts')));
 app.use('/cache/tts', express.static(path.join(__dirname, 'cache', 'tts')));
 app.use('/api', createRoutes(brain));
 
+// React 前端（Phase 1）：构建产物在 client/dist，挂在 /react，不影响旧 PWA 的 /
+app.use('/react', express.static(path.join(__dirname, 'client/dist'), staticOptions));
+app.get(['/react', '/react/{*path}'], (_req, res) => {
+  res.sendFile(path.join(__dirname, 'client/dist/index.html'));
+});
+
 // 健康检查
 app.get('/health', (req, res) => res.json({ ok: true, ts: Date.now() }));
 
