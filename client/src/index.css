@@ -12,6 +12,9 @@
   --text: #e8e6e1;
   --muted: #8a8791;
   --danger: #c65d57;
+  --glass: rgba(18, 18, 26, 0.5);
+  --glass-2: rgba(26, 26, 36, 0.5);
+  --glass-input: rgba(10, 10, 15, 0.5);
 }
 
 html, body, #root {

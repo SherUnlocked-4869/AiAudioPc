@@ -30,7 +30,7 @@ export function ChatInput({ onSend }: ChatInputProps) {
           onChange={(e) => setText(e.target.value)}
           placeholder="跟 Claudio 说点什么…"
           autoComplete="off"
-          className="flex-1 bg-bg border border-border text-text px-3 py-2.5 rounded-lg outline-none text-sm"
+          className="flex-1 bg-glass-input backdrop-blur-md border border-border text-text px-3 py-2.5 rounded-lg outline-none text-sm"
         />
         <button
           type="submit"

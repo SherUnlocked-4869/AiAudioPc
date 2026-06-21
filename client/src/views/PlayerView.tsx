@@ -11,7 +11,7 @@ export function PlayerView() {
   const claudio = useClaudioContext()
 
   return (
-    <section className="mb-4 rounded-3xl border border-border bg-panel p-5">
+    <section className="mb-4 rounded-3xl border border-border bg-glass backdrop-blur-md p-5">
       <TrackInfo track={claudio.currentTrack} />
 
       {claudio.currentTrack && (

@@ -25,8 +25,8 @@ export function TabNav({ tabs, activeId, onTabChange }: TabNavProps) {
             className={cn(
               'flex-1 cursor-pointer rounded-lg border px-3 py-3 transition-colors',
               active
-                ? 'border-accent bg-panel-2 text-accent'
-                : 'border-border bg-panel text-muted',
+                ? 'border-accent bg-glass-2 backdrop-blur-md text-accent'
+                : 'border-border bg-glass backdrop-blur-md text-muted',
             )}
           >
             {tab.label}

@@ -52,7 +52,7 @@ export function HistoryView() {
   }, [])
 
   return (
-    <section className="mb-4 rounded-3xl border border-border bg-panel p-5">
+    <section className="mb-4 rounded-3xl border border-border bg-glass backdrop-blur-md p-5">
       <div className="mb-2 text-[0.7rem] uppercase tracking-[1.5px] text-accent">
         HISTORY
       </div>

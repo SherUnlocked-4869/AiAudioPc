@@ -19,7 +19,7 @@ export function PlayControls({ isPlaying, onPlay, onPause, onNext }: PlayControl
       <button
         type="button"
         onClick={onNext}
-        className="flex-1 h-[52px] rounded-[26px] border border-border bg-panel-2 text-text text-base flex items-center justify-center gap-2 cursor-pointer
+        className="flex-1 h-[52px] rounded-[26px] border border-border bg-glass-2 backdrop-blur-md text-text text-base flex items-center justify-center gap-2 cursor-pointer
           hover:border-accent hover:text-accent transition-colors"
       >
         ▶▶ 下一首
